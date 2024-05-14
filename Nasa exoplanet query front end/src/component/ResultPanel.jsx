@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 function ResultsPanel({ data }) {
@@ -11,9 +12,20 @@ function ResultsPanel({ data }) {
 
     const sorted = [...sortedData].sort((a, b) => {
       if (newSortOrder === 'asc') {
-        return a[column].localeCompare(b[column]);
-      } else {
-        return b[column].localeCompare(a[column]);
+        if(typeof a[column] === 'number' ){
+          return a[column] - b[column];
+        }
+        else{
+          return a[column].localeCompare(b[column]);
+        }
+      }
+       else {  
+        if(typeof b[column] === 'number'){
+          return b[column] - a[column];
+        }
+        else{
+          return b[column].localeCompare(a[column]);
+        }
       }
     });
 
